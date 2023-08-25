@@ -28,7 +28,7 @@ const UserReducer = (state: any, action: any) => {
 
     case "HANDLE_USER_UPDATE":
       const { username, newdata } = action.payload;
-      fetch("http://localhost:5000/updateuser", {
+      fetch("https://gate-demo-api.vercel.app/updateuser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const UserReducer = (state: any, action: any) => {
 
     case "HANDLE_USER_PASSWORD_UPDATE":
         const{password,newpassword}=action.payload;
-        fetch("http://localhost:5000/updatepassword", {
+        fetch("https://gate-demo-api.vercel.app/updatepassword", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
