@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background-color: #25272A;
+}
+
+.tox-notifications-container{
+  display: none;
+}
+.tox-statusbar__branding{
+  display: none;
+}
+
+@media (max-width:620px) {
+    .search_bar{
+      display: none;
+    }
+}
+
+
+
+
+

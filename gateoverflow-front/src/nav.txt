@@ -1,0 +1,205 @@
+<section className="container mx-auto mb-5" style={{ color: "#fff" }}>
+      <div className="px-4 sm:py-5 sm:px-20">
+        <div className="">
+          <h2
+            className="text-3xl my-7 font-semibold"
+            style={{ color: "#c4c0c0" }}
+          >
+            Ask a query
+          </h2>
+        </div>
+
+        <div>
+          <div className="rounded-lg bg-[#36393f] pt-4 pb-10 px-4">
+            <div>
+              {/* <div className='pb-10 xl:pr-72'>
+                <p className='text-sm' style={{ color: "#9b9b9b" }}>
+                  × All previous year questions are stored under the "Previous" TAB. Please select a year and choose a question number.
+                  Please try to add question source (e.g. Cormen 3rd edition 2.5, ISRO 2015 33 etc.) as Question Title. Use the Question Description part for the question text.
+                  Also please refrain from posting any copy righted or coaching material here. If you do so, you risk being banned from here. You can see more posting guidelines<a href='#' style={{ color: "#0aa8ff" }}> here </a>.
+                  Space is a tag separator here; so please use '-' to combine words in tag filed. Most of the tags will be auto-completed when you type a few letters.</p>
+                <p className='text-sm' style={{ color: "#9b9b9b" }}><a href='#' style={{ color: "#0aa8ff" }}>More formatting ways.</a></p>
+                <p className='text-sm' style={{ color: "#9b9b9b" }}>If you are posting a test series question please add the Name of the Series in the Title</p>
+              </div> */}
+
+              <div>
+                <label
+                  htmlFor=""
+                  className="text-sm font-medium"
+                  style={{ color: "#dcdcdc" }}
+                >
+                  The question source (Book Name Chapter Name Ex. # or Exam Name
+                  Year Qn. # or the Topic Name for any self doubts. Questions
+                  without source won't be approved):
+                </label>
+                <br />
+                <input
+                  type="text"
+                  className="mt-2 outline-none text-[#ffffff] bg-[#36393F] border border-[#ffffff] sm:text-sm block w-full p-2 focus:border-[#CC39FF] focus:border-2 rounded-md"
+                />
+              </div>
+
+              <div className="my-8">
+                <span className="text-sm mr-1.5" style={{ color: "#dcdcdc" }}>
+                  Category :{" "}
+                </span>
+                <select name="" id="" className="bg-[#4d515a]">
+                  <option value="">ABCDEFGHIGJFLASDJF</option>
+                  <option value="">ABCDEFGHIGJFLASDJF</option>
+                  <option value="">ABCDEFGHIGJFLASDJF</option>
+                  <option value="">ABCDEFGHIGJFLASDJF</option>
+                </select>
+              </div>
+
+              <div>
+                <p className="text-sm" style={{ color: "#dcdcdc" }}>
+                  Query text in full :
+                </p>
+
+               
+
+                <input
+                  type="file"
+                  id="my-file"
+                  name="my-file"
+                  style={{ visibility: "hidden" }}
+                  onChange={(e: any) => setfiles(e.target.files[0])}
+                />
+                <div className="z-10">
+                  <Editor
+                    id="data"
+                    apiKey="vgqslsc9vjjerm2s36zxvqup8dzwlo0sreuw2g3uk1ypv24j"
+                    // onChange={(e)=>console.log(e.target.getContent())}
+                    onInit={(evt, editor) => (editorRef.current=editor)}
+                    onEditorChange={(e)=>{
+                      var outele:any=document.querySelector('.outofeditor');
+                      outele.innerHTML=e;
+                      for(let i=0;i<outele.childNodes.length;i++){
+                        if(outele.childNodes[i].nodeName!=="#text"){
+                          outele.childNodes[i].style.lineHeight="20px"
+                          outele.childNodes[i].style.color="white";
+                        }
+                      }
+                   
+                    }}
+                    init={{
+                      height: 300,
+                      menubar: true,
+                      plugins: [
+                        "advlist",
+                        "autolink",
+                        "link",
+                        "image",
+                        "editimage",
+                        "lists",
+                        "charmap",
+                        "preview",
+                        "anchor",
+                        "pagebreak",
+                        "searchreplace",
+                        "wordcount",
+                        "visualblocks",
+                        "code",
+                        "fullscreen",
+                        "insertdatetime",
+                        "media",
+                        "table",
+                        "mathquill",
+                        "template",
+                        "help",
+                      ],
+                      file_browser_callback_types: "image",
+                      file_picker_callback: function (callback, value, meta) {
+                        if (meta.filetype == "image") {
+                          var input: any = document.getElementById("my-file");
+                          input.click();
+                          input.onchange = async function () {
+                            async function readFileAsDataURL(file: any) {
+                              let result_base64 = await new Promise(
+                                (resolve) => {
+                                  let fileReader = new FileReader();
+                                  fileReader.onload = (e) =>
+                                    resolve(fileReader.result);
+                                  fileReader.readAsDataURL(file);
+                                }
+                              );
+                              return result_base64;
+                            }
+                            var file = input.files[0];
+                            let data64image = await readFileAsDataURL(file);
+                            console.log(data64image);
+
+                            const res = await fetch(
+                              "http://localhost:5000/api/uploadimage",
+                              {
+                                method: "POST",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({ imageData: data64image }),
+                              }
+                            );
+                            const data = await res.json();
+                            console.log(data);
+                            callback(data.imageURL);
+                          };
+                        }
+                      },
+                      paste_data_images: true,
+                      forced_root_block: "div",
+                      forced_root_block_attrs: {
+                        style: "color:#040304 ; font-family:sans-serif,Roboto",
+                      },
+                      toolbar:
+                        "undo redo fontsizeinput fontfamilyinput | styles | bold italic underline | alignleft aligncenter alignright alignjustify | " +
+                        "bullist numlist outdent indent | link image | print preview media fullscreen | " +
+                        "forecolor backcolor charmap blockquote lineheight code selectall strikethrough subscript superscript addcomment",
+                      content_style:
+                        "body {line-height:18px;font-family:Arial;color:#fff}",
+                    }}
+                  />
+                </div>
+                <div className="mt-2">
+                    <div><hr className="w-full mb-2"/></div>
+                    <div>
+                      <div className="outofeditor text-[#fff]"></div>
+                    </div>
+                    <div><hr className="w-full mt-2"/></div>
+                </div>
+              </div>
+
+              <div className="py-12">
+                <label
+                  htmlFor=""
+                  className="text-sm"
+                  style={{ color: "#dcdcdc" }}
+                >
+                  The question source (Book Name Chapter Name Ex. # or Exam Name
+                  Year Qn. # or the Topic Name for any self doubts. Questions
+                  without source won't be approved):
+                </label>
+                <br />
+                <input
+                  type="text"
+                  className="mt-3 w-full border-2 border-[#fff] bg-transparent"
+                />
+
+                <div className="mt-3">
+                  <input type="checkbox" className="h-4 w-4 mr-3" />
+                  <p className="text-sm inline" style={{ color: "#dcdcdc" }}>
+                    Email me (solankifenil21@gmail.com) if my question is
+                    answered or commented on
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right">
+              <button className="bg-[#7c39ff] text-sm font-bold px-4 py-2">
+                ASK THE QUESTION
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

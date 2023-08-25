@@ -1,0 +1,7 @@
+.dynamic-element-question img{
+    display: none;
+}
+.title-query-section:hover .title-section{
+    transition: 0.4s;
+    color: #7C39FF;
+}
