@@ -60,7 +60,7 @@ const upload_image = async (req, res) => {
   });
   await ImageDataStored.save().then((result) => {
     console.log("image stored!!");
-    res.send({ imageURL: `https://gate-demo-front.vercel.app/api/getimage/${uuid4}` });
+    res.send({ imageURL: `https://gate-demo-api.vercel.app/api/getimage/${uuid4}` });
   });
 };
 
