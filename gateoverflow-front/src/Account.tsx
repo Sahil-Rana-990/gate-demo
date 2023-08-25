@@ -26,6 +26,7 @@ const Account = () => {
     })
       .then((res) => res.json())
       .then((data) =>
+        console.log(data);
         setuserediteddata({ ...userediteddata, userimage: data.imageURL })
       );
   }
