@@ -79,7 +79,7 @@ else
     const setUser=async()=>{
       console.log(userInfo)
       try{
-        const res=await axios.post("http://localhost:5000/registeruser",userInfo,{
+        const res=await axios.post("https://gate-demo-api.vercel.app/registeruser",userInfo,{
           headers:{
             "Content-Type":"application/json"
           }
