@@ -32,7 +32,7 @@ const AskQuery = () => {
         position:toast.POSITION.TOP_RIGHT
       })
     }else{
-      fetch('http://localhost:5000/query/uploadquery',{
+      fetch('https://gate-demo-api.vercel.app/query/uploadquery',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
