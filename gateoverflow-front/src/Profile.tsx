@@ -20,6 +20,7 @@ const Profile = () => {
 
   useEffect(() => {
     getAllUserData();
+    console.log(userdata)
   }, []);
 
   function openCity(evt: any, cityName: any) {
@@ -44,7 +45,7 @@ const Profile = () => {
           <img
             src={userdata.userimage}
             alt="hello"
-            className="w-[300px] h-[300px] sm:w-[200px] sm:h-[200px] xs:h-[100px] xs:h-[100px] mx-auto rounded-lg"
+            className="w-[300px] h-[300px] sm:w-[200px] sm:h-[200px] xs:w-[100px] xs:h-[100px] mx-auto rounded-lg"
           />
         </div>
         <div className="my-5 xs:w-[180px]">

@@ -1,4 +1,5 @@
 require("./db/conn");
+require('./models/UploadImage');
 const express = require("express");
 const app = express();
 const RegisterUserModel = require("./models/RegisterModel");
@@ -12,7 +13,8 @@ const {
   upload_query,
   user_activity,
   update_password,
-  get_all_question
+  get_all_question,
+  get_single_question
 } = require("./functions/controller");
 const cors = require("cors");
 
@@ -38,7 +40,8 @@ app.post("/updateuser", update_user);
 app.post("/query/uploadquery",upload_query);
 app.post("/useractivity",user_activity);
 app.post("/updatepassword",update_password);
-app.get("/allquestions",get_all_question)
+app.get("/allquestions",get_all_question);
+app.get("/query/singlequery/:queryid",get_single_question)
 
 
 app.listen(5000, () => {

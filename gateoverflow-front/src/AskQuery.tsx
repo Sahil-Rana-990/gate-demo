@@ -1,11 +1,11 @@
-import { useUserContext } from "./context/UserContext";
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { useQuestionContext } from "./context/QuestionsContext";
 
 const AskQuery = () => {
-  let {loginEmail,loginPassword} =useUserContext();
-  
+  let { upload_query } = useQuestionContext();
+
   let [files, setfiles] = useState(0);
   const editorRef: any = useRef(null);
 
@@ -17,9 +17,8 @@ const AskQuery = () => {
     tags: "",
     userimage: Alldata.userimage,
     username: Alldata.username,
+    askquestion:Alldata.askquestion
   });
-  const { isLoggedIn, userDetailInfo, imageLoaded, userImage } =
-    useUserContext();
 
   const changeQuestionData = (e: any) => {
     const { name, value } = e.target;
@@ -27,24 +26,18 @@ const AskQuery = () => {
   };
 
   const FinalSubmit = () => {
-    if(question.title==="" || question.category=="" || question.tags===""){
-      toast.warning('Please, Fill Data',{
-        position:toast.POSITION.TOP_RIGHT
-      })
-    }else{
-      fetch('http://localhost:5000/query/uploadquery',{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(question)
-    }).then(res=>res.json()).then(data=>{
-      if(data.message=="OK"){
-        toast.success('Question Stored !!',{
-          position:toast.POSITION.TOP_RIGHT
-        })
-      }
-    }).catch(err=>console.log(err.message))
+    if (
+      question.title === "" ||
+      question.category == "" ||
+      question.tags === ""
+    ) {
+      toast.warning("Please, Fill Data", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      // -----------------------   for upload query
+      
+      upload_query(question);
     }
   };
 
@@ -59,10 +52,12 @@ const AskQuery = () => {
   }
   return (
     <section className="bg-[#25272A] dark:bg-gray-900 mt-[20px] mb-[100px]">
-      <ToastContainer/>
+      <ToastContainer />
       <div className="flex flex-col items-center px-6 mx-auto lg:py-0">
         <div className="w-[70%] sm:w-[100%] xs:w-[110%] my-3">
-          <span className="text-4xl text-white font-medium">Ask a question</span>
+          <span className="text-4xl text-white font-medium">
+            Ask a question
+          </span>
         </div>
         <div className="w-[70%] sm:w-[100%] xs:w-[110%] bg-[#36393F] rounded-md p-5">
           {/* Awareness section */}
@@ -115,11 +110,15 @@ const AskQuery = () => {
               >
                 <option value="" defaultValue={""}></option>
                 <option value="General Aptitude">General Aptitude</option>
-                <option value="Engineering Mathematics">Engineering Mathematics</option>
+                <option value="Engineering Mathematics">
+                  Engineering Mathematics
+                </option>
                 <option value="Digital Logic">Digital Logic</option>
                 <option value="Programming and DS">Programming and DS</option>
                 <option value="Algorithms">Algorithms</option>
-                <option value="Theory of Computation">Theory of Computation</option>
+                <option value="Theory of Computation">
+                  Theory of Computation
+                </option>
                 <option value="Compiler Design">Compiler Design</option>
                 <option value="Operating System">Operating System</option>
                 <option value="Databases">Databases</option>
@@ -129,7 +128,6 @@ const AskQuery = () => {
                 <option value="Others">Others</option>
                 <option value="Admissions">Admissions</option>
                 <option value="Unknown Category">Unknown Category</option>
-                
               </select>
             </div>
           </div>
@@ -153,7 +151,7 @@ const AskQuery = () => {
                 // onChange={(e)=>console.log(e.target.getContent())}
                 onInit={(evt, editor) => (editorRef.current = editor)}
                 onEditorChange={(e) => {
-                  var outele: any = document.querySelector(".outofeditor");
+                  var outele: any = document.querySelector(".outputofeditor");
                   outele.innerHTML = e;
                   for (let i = 0; i < outele.childNodes.length; i++) {
                     if (outele.childNodes[i].nodeName !== "#text") {
@@ -242,7 +240,7 @@ const AskQuery = () => {
                 <hr className="w-full mb-2" />
               </div>
               <div>
-                <div className="outofeditor text-[#fff]"></div>
+                <div className="outputofeditor text-[#fff]"></div>
               </div>
               <div>
                 <hr className="w-full mt-2" />

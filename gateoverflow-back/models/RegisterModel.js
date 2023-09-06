@@ -28,7 +28,6 @@ const RegisterUserSchema=new mongoose.Schema({
     },
     joindate:{
         type:Date,
-        default:moment().toDate(),
         required:true
     },
     userimage:{
@@ -66,8 +65,7 @@ const RegisterUserSchema=new mongoose.Schema({
     },
     lastseen:{
         type:Date,
-        required:true,
-        default:moment().toDate()
+        required:true
     },
     askquestion:{
         type:Number,
@@ -104,7 +102,16 @@ const RegisterUserSchema=new mongoose.Schema({
         required:true,
         default:0,
     },
-    
+    arrayofupvote:{
+        type:Array,
+        required:true,
+        default:[]
+    },
+    arrayofdownvote:{
+        type:Array,
+        required:true,
+        default:[]
+    }
 })
 
 const RegisterUserModel=new mongoose.model('register-users',RegisterUserSchema);

@@ -3,7 +3,8 @@ const moment=require("moment");
 const QuerySchema=new mongoose.Schema({
     title:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     category:{
         type:String,
@@ -18,9 +19,9 @@ const QuerySchema=new mongoose.Schema({
         required:true
     },
     views:{
-        type:Number,
+        type:Array,
         required:true,
-        default:0
+        default:[]
     },
     userimage:{
         type:String,
@@ -37,7 +38,6 @@ const QuerySchema=new mongoose.Schema({
     },
     askdate:{
         type:Date,
-        default:moment().toDate(),
         required:true
     }
 })

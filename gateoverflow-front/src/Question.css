@@ -1,7 +1,11 @@
 .dynamic-element-question img{
     display: none;
 }
-.title-query-section:hover .title-section{
+.title-query-section:hover .title-section,.outofeditor{
     transition: 0.4s;
-    color: #7C39FF;
+    color: #7C39FF !important;
+}
+
+.outofeditor div{
+    color: #959BA7 !important;
 }

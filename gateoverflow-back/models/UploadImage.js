@@ -4,16 +4,13 @@ const ImageSchema=new mongoose.Schema({
     imgName:{
         type:String,
         required:true,
-        unique:true
     },
     imgData:{
         type:String,
-        required:true,
-        unique:true
+        required:true
     },
     joindate:{
         type:Date,
-        default:Date.now(),
         required:true
     }
 })

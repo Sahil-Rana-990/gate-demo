@@ -12,9 +12,9 @@ const initialState: any = {
 const UserContext = createContext(initialState);
 
 const UserProvider = ({ children }: any) => {
-  const getUser = async (userdata: any) => {
+  const getUser = async (username: any) => {
     try {
-      const res = await axios.get(`http://localhost:5000/singleuser/${userdata.username}`);
+      const res = await axios.get(`http://localhost:5000/singleuser/${username}`);
       const data = await res.data;
       handleLogin(data.singleUser)
     } catch (e) {
@@ -27,7 +27,7 @@ const UserProvider = ({ children }: any) => {
     let b: any = JSON.parse(a);
 
     if (b !== null) {
-      getUser(b);
+      getUser(b.username);
     }
   }, []);
   const [state, dispatch]: any = useReducer(reducer, initialState);
@@ -36,6 +36,7 @@ const UserProvider = ({ children }: any) => {
 
     dispatch({ type: "HANDLE_LOGIN", payload: userData });
   };
+  
 
   const handleUpdateUserData=(username:String,newdata:any)=>{
     dispatch({type:"HANDLE_USER_UPDATE",payload:{username,newdata}})
@@ -44,7 +45,7 @@ const UserProvider = ({ children }: any) => {
     dispatch({type:"HANDLE_USER_PASSWORD_UPDATE",payload:{password,newpassword}})
   }
   return (
-    <UserContext.Provider value={{ ...state, handleLogin,handleUpdateUserData,handleUpdatePassword }}>
+    <UserContext.Provider value={{ ...state, handleLogin,handleUpdateUserData,handleUpdatePassword,getUser }}>
       {children}
     </UserContext.Provider>
   );
