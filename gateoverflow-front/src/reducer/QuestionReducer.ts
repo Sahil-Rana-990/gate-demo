@@ -13,7 +13,7 @@ const QuestionReducer = (state: any, action: any) => {
         singlequery:action.payload
       };
     case "UPLOAD_USER_QUERY":
-      fetch("http://localhost:5000/query/uploadquery", {
+      fetch("https://gate-demo-api.vercel.app/query/uploadquery", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
