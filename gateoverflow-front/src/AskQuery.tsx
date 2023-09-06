@@ -26,6 +26,7 @@ const AskQuery = () => {
   };
 
   const FinalSubmit = () => {
+<<<<<<< HEAD
     if (
       question.title === "" ||
       question.category == "" ||
@@ -38,6 +39,26 @@ const AskQuery = () => {
       // -----------------------   for upload query
       
       upload_query(question);
+=======
+    if(question.title==="" || question.category=="" || question.tags===""){
+      toast.warning('Please, Fill Data',{
+        position:toast.POSITION.TOP_RIGHT
+      })
+    }else{
+      fetch('https://gate-demo-api.vercel.app/query/uploadquery',{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(question)
+    }).then(res=>res.json()).then(data=>{
+      if(data.message=="OK"){
+        toast.success('Question Stored !!',{
+          position:toast.POSITION.TOP_RIGHT
+        })
+      }
+    }).catch(err=>console.log(err.message))
+>>>>>>> 30b112f604dd2b62726671e3533865b01ace08b4
     }
   };
 

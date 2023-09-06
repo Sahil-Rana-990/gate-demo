@@ -12,7 +12,7 @@ const Profile = () => {
 
   async function getAllUserData() {
     let getAllData: any = await fetch(
-      `http://localhost:5000/singleuser/${username}`
+      `https://gate-demo-api.vercel.app/singleuser/${username}`
     );
     let { singleUser } = await getAllData.json();
     setuserdata(singleUser);

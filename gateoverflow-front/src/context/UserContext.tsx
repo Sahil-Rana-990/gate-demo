@@ -14,7 +14,11 @@ const UserContext = createContext(initialState);
 const UserProvider = ({ children }: any) => {
   const getUser = async (username: any) => {
     try {
+<<<<<<< HEAD
       const res = await axios.get(`http://localhost:5000/singleuser/${username}`);
+=======
+      const res = await axios.get(`https://gate-demo-api.vercel.app/singleuser/${userdata.username}`);
+>>>>>>> 30b112f604dd2b62726671e3533865b01ace08b4
       const data = await res.data;
       handleLogin(data.singleUser)
     } catch (e) {

@@ -13,7 +13,7 @@ const QuestionProvider = ({ children }: any) => {
   const [state, dispatch]: any = useReducer(reducer, initialState);
 
   const getallquestion = async () => {
-    const response = await axios.get("http://localhost:5000/allquestions");
+    const response = await axios.get("https://gate-demo-api.vercel.app/allquestions");
     const data = await response.data;
     return data;
   };
