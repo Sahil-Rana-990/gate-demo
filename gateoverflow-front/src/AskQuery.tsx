@@ -26,7 +26,6 @@ const AskQuery = () => {
   };
 
   const FinalSubmit = () => {
-<<<<<<< HEAD
     if (
       question.title === "" ||
       question.category == "" ||
@@ -39,7 +38,7 @@ const AskQuery = () => {
       // -----------------------   for upload query
       
       upload_query(question);
-=======
+
     if(question.title==="" || question.category=="" || question.tags===""){
       toast.warning('Please, Fill Data',{
         position:toast.POSITION.TOP_RIGHT
