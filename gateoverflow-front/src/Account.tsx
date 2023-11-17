@@ -17,7 +17,7 @@ const Account = () => {
 
 
   function get_user_image_url(data64: any) {
-    fetch("http://localhost:5000/api/uploadimage", {
+    fetch("https://gate-demo-api.vercel.app/api/uploadimage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
