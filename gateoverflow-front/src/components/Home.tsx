@@ -1,41 +1,58 @@
 import React from 'react'
-
+import {FcGenealogy} from 'react-icons/fc'
+import {BiMath} from 'react-icons/bi';
+import {BsCodeSlash} from 'react-icons/bs';
+import {MdOutlineSettingsSystemDaydream} from 'react-icons/md';
+import {TbLogicAnd,TbManualGearbox} from 'react-icons/tb'
+import {AiOutlineApartment,AiFillSetting} from 'react-icons/ai'
 const Home = () => {
   return (
-    <div>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi rhoncus, augue hendrerit placerat suscipit, elit diam fringilla nisl, at imperdiet elit mauris in libero. Praesent non odio at orci aliquet rhoncus non sed nisl. Duis iaculis consequat nisi eget faucibus. Aliquam erat volutpat. Nulla tristique dolor ac erat tincidunt pulvinar. Praesent quam lectus, facilisis eu sollicitudin nec, cursus ac augue. Phasellus ornare at risus a tempus. Morbi id imperdiet lectus. Proin et ultricies nisl. Vivamus hendrerit lacinia libero, ac maximus quam elementum vitae. Nulla nec arcu quis lectus malesuada mollis. Aliquam in porta velit, id molestie velit. Cras nec dolor vel orci eleifend varius. Mauris consectetur leo cursus eros cursus tristique.
+    <div className='my-10 xs:my-5'>
+      <div className='flex flex-col items-center px-6 mx-auto lg:py-0'>
+        <div className='w-[800px] '>
+          {/* title for subject */}
+          <div className='text-4xl font-medium font-sans text-gray-500 text-center'>
+            GateOverFlow Subject
+          </div>
 
-Curabitur ut libero ac mi semper semper. Duis a imperdiet neque. Integer non aliquet odio, a tempus lacus. Vestibulum et dignissim tortor, eget viverra diam. Nulla ut orci tortor. Quisque dapibus risus at malesuada congue. In et rhoncus ligula. Ut malesuada, ex ac pulvinar condimentum, est purus feugiat mauris, eu pharetra ligula tortor ultricies arcu. Phasellus aliquam quam at tempus maximus. Aliquam in rutrum magna, ut tempor urna. Nam in odio vitae arcu euismod ultrices sit amet vel dui. Ut id auctor nisi. Pellentesque nec orci molestie, aliquet augue ac, luctus risus. Vestibulum posuere neque quam, et elementum eros mollis eu. Donec laoreet maximus est a venenatis. Donec finibus hendrerit nulla, et congue diam convallis eget.
-
-Integer gravida sapien metus, vel finibus lorem cursus mollis. Pellentesque in accumsan enim. Praesent id metus nec orci lobortis rutrum. Ut rhoncus diam a consectetur faucibus. Aliquam sollicitudin lorem sed magna tristique, id dictum lorem porta. Phasellus pulvinar purus id tortor lacinia, ut eleifend sapien interdum. Cras varius, nunc nec pulvinar tempor, nunc lacus sagittis ante, id eleifend diam felis ut erat. Proin malesuada orci id tristique egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec sit amet pretium sapien, eu dignissim ipsum. Nam a libero ac elit semper dapibus. Quisque bibendum ante et consectetur convallis. Donec consectetur mi sit amet dolor faucibus vehicula.
-
-Aliquam erat volutpat. Praesent dignissim, elit maximus lobortis semper, justo lectus faucibus turpis, ut ornare ante neque vitae lorem. Maecenas mattis arcu at pharetra accumsan. Aliquam quis libero interdum ex sagittis pellentesque. Duis et condimentum augue. Nulla fringilla commodo sem, elementum porta risus rhoncus vitae. Nulla pellentesque, mauris at viverra accumsan, lectus purus hendrerit sapien, et tincidunt elit dolor tristique orci. Aenean sit amet ipsum tellus. Vivamus felis tellus, pretium ac pretium sed, semper ac nulla. Vestibulum placerat tellus turpis, quis porta diam imperdiet ut. Fusce commodo nisl sit amet lorem interdum laoreet.
-
-Donec elementum ante sit amet consequat consequat. Donec vulputate, mauris nec eleifend facilisis, quam risus aliquet orci, vitae lobortis libero leo at nibh. Nam faucibus arcu vitae libero mollis feugiat. Donec purus tellus, aliquet sed ante sed, aliquam porttitor nisl. Morbi mi arcu, condimentum et eros vitae, tristique varius augue. Sed elit massa, dictum sed tincidunt et, vehicula non mauris. Aenean eget orci non lectus faucibus varius. Donec at placerat odio. Nunc ullamcorper malesuada ultrices. Quisque euismod tincidunt ex, id euismod tellus tristique eget. Nam eu purus dolor. Sed purus orci, suscipit ac suscipit sit amet, molestie quis ex. Curabitur sed mi ac felis hendrerit luctus. Nullam quis mi in dolor mattis dictum at quis odio. Sed fermentum rutrum mollis.
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi rhoncus, augue hendrerit placerat suscipit, elit diam fringilla nisl, at imperdiet elit mauris in libero. Praesent non odio at orci aliquet rhoncus non sed nisl. Duis iaculis consequat nisi eget faucibus. Aliquam erat volutpat. Nulla tristique dolor ac erat tincidunt pulvinar. Praesent quam lectus, facilisis eu sollicitudin nec, cursus ac augue. Phasellus ornare at risus a tempus. Morbi id imperdiet lectus. Proin et ultricies nisl. Vivamus hendrerit lacinia libero, ac maximus quam elementum vitae. Nulla nec arcu quis lectus malesuada mollis. Aliquam in porta velit, id molestie velit. Cras nec dolor vel orci eleifend varius. Mauris consectetur leo cursus eros cursus tristique.
-
-Curabitur ut libero ac mi semper semper. Duis a imperdiet neque. Integer non aliquet odio, a tempus lacus. Vestibulum et dignissim tortor, eget viverra diam. Nulla ut orci tortor. Quisque dapibus risus at malesuada congue. In et rhoncus ligula. Ut malesuada, ex ac pulvinar condimentum, est purus feugiat mauris, eu pharetra ligula tortor ultricies arcu. Phasellus aliquam quam at tempus maximus. Aliquam in rutrum magna, ut tempor urna. Nam in odio vitae arcu euismod ultrices sit amet vel dui. Ut id auctor nisi. Pellentesque nec orci molestie, aliquet augue ac, luctus risus. Vestibulum posuere neque quam, et elementum eros mollis eu. Donec laoreet maximus est a venenatis. Donec finibus hendrerit nulla, et congue diam convallis eget.
-
-Integer gravida sapien metus, vel finibus lorem cursus mollis. Pellentesque in accumsan enim. Praesent id metus nec orci lobortis rutrum. Ut rhoncus diam a consectetur faucibus. Aliquam sollicitudin lorem sed magna tristique, id dictum lorem porta. Phasellus pulvinar purus id tortor lacinia, ut eleifend sapien interdum. Cras varius, nunc nec pulvinar tempor, nunc lacus sagittis ante, id eleifend diam felis ut erat. Proin malesuada orci id tristique egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec sit amet pretium sapien, eu dignissim ipsum. Nam a libero ac elit semper dapibus. Quisque bibendum ante et consectetur convallis. Donec consectetur mi sit amet dolor faucibus vehicula.
-
-Aliquam erat volutpat. Praesent dignissim, elit maximus lobortis semper, justo lectus faucibus turpis, ut ornare ante neque vitae lorem. Maecenas mattis arcu at pharetra accumsan. Aliquam quis libero interdum ex sagittis pellentesque. Duis et condimentum augue. Nulla fringilla commodo sem, elementum porta risus rhoncus vitae. Nulla pellentesque, mauris at viverra accumsan, lectus purus hendrerit sapien, et tincidunt elit dolor tristique orci. Aenean sit amet ipsum tellus. Vivamus felis tellus, pretium ac pretium sed, semper ac nulla. Vestibulum placerat tellus turpis, quis porta diam imperdiet ut. Fusce commodo nisl sit amet lorem interdum laoreet.
-
-Donec elementum ante sit amet consequat consequat. Donec vulputate, mauris nec eleifend facilisis, quam risus aliquet orci, vitae lobortis libero leo at nibh. Nam faucibus arcu vitae libero mollis feugiat. Donec purus tellus, aliquet sed ante sed, aliquam porttitor nisl. Morbi mi arcu, condimentum et eros vitae, tristique varius augue. Sed elit massa, dictum sed tincidunt et, vehicula non mauris. Aenean eget orci non lectus faucibus varius. Donec at placerat odio. Nunc ullamcorper malesuada ultrices. Quisque euismod tincidunt ex, id euismod tellus tristique eget. Nam eu purus dolor. Sed purus orci, suscipit ac suscipit sit amet, molestie quis ex. Curabitur sed mi ac felis hendrerit luctus. Nullam quis mi in dolor mattis dictum at quis odio. Sed fermentum rutrum mollis.
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi rhoncus, augue hendrerit placerat suscipit, elit diam fringilla nisl, at imperdiet elit mauris in libero. Praesent non odio at orci aliquet rhoncus non sed nisl. Duis iaculis consequat nisi eget faucibus. Aliquam erat volutpat. Nulla tristique dolor ac erat tincidunt pulvinar. Praesent quam lectus, facilisis eu sollicitudin nec, cursus ac augue. Phasellus ornare at risus a tempus. Morbi id imperdiet lectus. Proin et ultricies nisl. Vivamus hendrerit lacinia libero, ac maximus quam elementum vitae. Nulla nec arcu quis lectus malesuada mollis. Aliquam in porta velit, id molestie velit. Cras nec dolor vel orci eleifend varius. Mauris consectetur leo cursus eros cursus tristique.
-
-Curabitur ut libero ac mi semper semper. Duis a imperdiet neque. Integer non aliquet odio, a tempus lacus. Vestibulum et dignissim tortor, eget viverra diam. Nulla ut orci tortor. Quisque dapibus risus at malesuada congue. In et rhoncus ligula. Ut malesuada, ex ac pulvinar condimentum, est purus feugiat mauris, eu pharetra ligula tortor ultricies arcu. Phasellus aliquam quam at tempus maximus. Aliquam in rutrum magna, ut tempor urna. Nam in odio vitae arcu euismod ultrices sit amet vel dui. Ut id auctor nisi. Pellentesque nec orci molestie, aliquet augue ac, luctus risus. Vestibulum posuere neque quam, et elementum eros mollis eu. Donec laoreet maximus est a venenatis. Donec finibus hendrerit nulla, et congue diam convallis eget.
-
-Integer gravida sapien metus, vel finibus lorem cursus mollis. Pellentesque in accumsan enim. Praesent id metus nec orci lobortis rutrum. Ut rhoncus diam a consectetur faucibus. Aliquam sollicitudin lorem sed magna tristique, id dictum lorem porta. Phasellus pulvinar purus id tortor lacinia, ut eleifend sapien interdum. Cras varius, nunc nec pulvinar tempor, nunc lacus sagittis ante, id eleifend diam felis ut erat. Proin malesuada orci id tristique egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec sit amet pretium sapien, eu dignissim ipsum. Nam a libero ac elit semper dapibus. Quisque bibendum ante et consectetur convallis. Donec consectetur mi sit amet dolor faucibus vehicula.
-
-Aliquam erat volutpat. Praesent dignissim, elit maximus lobortis semper, justo lectus faucibus turpis, ut ornare ante neque vitae lorem. Maecenas mattis arcu at pharetra accumsan. Aliquam quis libero interdum ex sagittis pellentesque. Duis et condimentum augue. Nulla fringilla commodo sem, elementum porta risus rhoncus vitae. Nulla pellentesque, mauris at viverra accumsan, lectus purus hendrerit sapien, et tincidunt elit dolor tristique orci. Aenean sit amet ipsum tellus. Vivamus felis tellus, pretium ac pretium sed, semper ac nulla. Vestibulum placerat tellus turpis, quis porta diam imperdiet ut. Fusce commodo nisl sit amet lorem interdum laoreet.
-
-Donec elementum ante sit amet consequat consequat. Donec vulputate, mauris nec eleifend facilisis, quam risus aliquet orci, vitae lobortis libero leo at nibh. Nam faucibus arcu vitae libero mollis feugiat. Donec purus tellus, aliquet sed ante sed, aliquam porttitor nisl. Morbi mi arcu, condimentum et eros vitae, tristique varius augue. Sed elit massa, dictum sed tincidunt et, vehicula non mauris. Aenean eget orci non lectus faucibus varius. Donec at placerat odio. Nunc ullamcorper malesuada ultrices. Quisque euismod tincidunt ex, id euismod tellus tristique eget. Nam eu purus dolor. Sed purus orci, suscipit ac suscipit sit amet, molestie quis ex. Curabitur sed mi ac felis hendrerit luctus. Nullam quis mi in dolor mattis dictum at quis odio. Sed fermentum rutrum mollis.
-
-
+          {/* subjects */}
+          <div className='p-2 grid grid-cols-2 gap-5 mt-5'>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><FcGenealogy/></div>
+              <div className='text-center ml-5'>General Aptitude</div>
+            </div>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><BiMath/></div>
+              <div className='text-center ml-5'>Engineering Mathematics</div>
+            </div>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><TbLogicAnd/></div>
+              <div className='text-center ml-5'>Digital Logic</div>
+            </div>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><BsCodeSlash/></div>
+              <div className='text-center ml-5'>Programming and DS</div>
+            </div>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><TbManualGearbox/></div>
+              <div className='text-center ml-5'>Algorithms</div>
+            </div>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><AiOutlineApartment/></div>
+              <div className='text-center ml-5'>Theory of Computation</div>
+            </div>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><AiFillSetting/></div>
+              <div className='text-center ml-5'>Compiler Design</div>
+            </div>
+            <div className='bg-[#36393F] p-5 rounded-md text-white flex items-center hover:bg-purple-700 duration-500'>
+              <div className='text-4xl'><MdOutlineSettingsSystemDaydream/></div>
+              <div className='text-center ml-5'>Operating System</div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

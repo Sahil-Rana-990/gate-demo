@@ -5,6 +5,8 @@ import axios from "axios";
 const initialState: any = {
   allquestions: [],
   singlequery: {},
+  allanswers:[],
+  allcomments:[]
 };
 
 const Questioncontext = createContext(initialState);
@@ -13,14 +15,28 @@ const QuestionProvider = ({ children }: any) => {
   const [state, dispatch]: any = useReducer(reducer, initialState);
 
   const getallquestion = async () => {
-    const response = await axios.get("https://gate-demo-api.vercel.app/allquestions");
+    const response = await axios.get("http://localhost:5000/allquestions");
     const data = await response.data;
     return data;
   };
+  const getallanswers= async ()=>{
+    const response=await axios.get("http://localhost:5000/allanswers");
+    const data=await response.data;
+    return data;
+  }
+  const getallcomments= async ()=>{
+    const response=await axios.get("http://localhost:5000/allcomments");
+    const data=await response.data;
+    return data;
+  }
   useEffect(() => {
     (async function () {
       const data = await getallquestion();
       dispatch({ type: "GET_ALL_QUESTIONS", payload: data });
+      const data2=await getallanswers();
+      dispatch({type:"GET_ALL_ANSWERS",payload:data2});
+      const data3=await getallcomments();
+      dispatch({type:"GET_ALL_COMMENTS",payload:data3})
     })();
   }, []);
 
@@ -30,14 +46,14 @@ const QuestionProvider = ({ children }: any) => {
   };
   const get_single_query = async (id: String) => {
     const ResponsegetSingleQueryData = await fetch(
-      `https://gate-demo-api.vercel.app/query/singlequery/${id}`
+      `http://localhost:5000/query/singlequery/${id}`
     );
     const getSingleQueryData = await ResponsegetSingleQueryData.json();
     dispatch({ type: "GET_SINGLE_QUERY", payload: getSingleQueryData });
   };
 
   const set_up_vote = async (id: String, votes: any,userid:String,askusername:String) => {
-    const Response = await fetch(`https://gate-demo-api.vercel.app/useractivity`, {
+    const Response = await fetch(`http://localhost:5000/useractivity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,8 +69,45 @@ const QuestionProvider = ({ children }: any) => {
     const res = await Response.json();
     return res.message;
   };
+  const set_up_ANS_or_COMM=async (tag:String,id: String, votes: any,userid:String,postusername:String)=>{
+    const Response = await fetch(`http://localhost:5000/useractivity`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        task: "SET_UP_VOTE_ANS_COMM",
+        tag,
+        answerID: id,
+        votes: votes,
+        userid,
+        postusername
+      }),
+    });
+    const res = await Response.json();
+    return res.message;
+  }
+  const set_down_ANS_or_COMM=async(tag:String,id: String, votes: any,userid:String,postusername:String)=>{
+    const Response = await fetch(`http://localhost:5000/useractivity`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        task: "SET_DOWN_VOTE_ANS_COMM",
+        tag,
+        answerID: id,
+        votes: votes,
+        userid,
+        postusername
+      }),
+    });
+    const res = await Response.json();
+    return res.message;
+  }
+
   const set_down_vote = async (id: String, votes: any,userid:String,askusername:String) => {
-    const Response = await fetch(`https://gate-demo-api.vercel.app/useractivity`, {
+    const Response = await fetch(`http://localhost:5000/useractivity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +124,7 @@ const QuestionProvider = ({ children }: any) => {
     return res.message;
   };
   const set_question_views = async (questionid:String,userid: String) => {
-    const response=await fetch('https://gate-demo-api.vercel.app/useractivity',{
+    const response=await fetch('http://localhost:5000/useractivity',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -82,7 +135,25 @@ const QuestionProvider = ({ children }: any) => {
         userid
       })
     })
+    const flagviews=await response.json();
+    return flagviews;
   };
+
+  const set_post_answer_or_comment=async(tag:String,question:any)=>{
+    const response=await fetch('http://localhost:5000/query/uploadanswer',{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        tag,
+        question
+      })
+    })
+    const res = await response.json();
+    return res.message;
+  }
+  
   return (
     <Questioncontext.Provider
       value={{
@@ -92,6 +163,9 @@ const QuestionProvider = ({ children }: any) => {
         set_up_vote,
         set_down_vote,
         set_question_views,
+        set_post_answer_or_comment,
+        set_up_ANS_or_COMM,
+        set_down_ANS_or_COMM
       }}
     >
       {children}

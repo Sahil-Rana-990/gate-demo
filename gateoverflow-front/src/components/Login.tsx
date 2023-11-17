@@ -42,7 +42,7 @@ const Login = () => {
   const setUser = async () => {
     try {
       const res = await axios.post(
-        "https://gate-demo-api.vercel.app/loginuser",
+        "http://localhost:5000/loginuser",
         userInfo,
         {
           headers: {
@@ -55,7 +55,7 @@ const Login = () => {
         alert("please, first complete Register !!");
       } else {
         handleLogin(data);
-        fetch("https://gate-demo-api.vercel.app/useractivity", {
+        fetch("http://localhost:5000/useractivity", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

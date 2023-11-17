@@ -36,6 +36,7 @@ const AskQuery = () => {
       });
     } else {
       // -----------------------   for upload query
+      
       upload_query(question);
     }
   };

@@ -17,7 +17,7 @@ const Account = () => {
 
 
   function get_user_image_url(data64: any) {
-    fetch("https://gate-demo-api.vercel.app/api/uploadimage", {
+    fetch("http://localhost:5000/api/uploadimage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,10 +25,8 @@ const Account = () => {
       body: JSON.stringify({ imageData: data64 }),
     })
       .then((res) => res.json())
-      .then((data) =>{
-        console.log(data);
+      .then((data) =>
         setuserediteddata({ ...userediteddata, userimage: data.imageURL })
-      }
       );
   }
 

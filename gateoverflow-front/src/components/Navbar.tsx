@@ -27,7 +27,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (userDetailInfo) {
-      fetch(`https://gate-demo-api.vercel.app/singleuser/${userDetailInfo.username}`)
+      fetch(`http://localhost:5000/singleuser/${userDetailInfo.username}`)
         .then((res) => res.json())
         .then(({ singleUser }) => {
           sessionStorage.setItem("isloggedIn", JSON.stringify(singleUser));

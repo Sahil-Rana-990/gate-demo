@@ -3,6 +3,8 @@ const RegisterUserModel = require("../models/RegisterModel");
 const uuid = require("uuid");
 const ImageModel = require("../models/UploadImage");
 const QueryModel = require("../models/QueryModel");
+const AnswerModel=require("../models/AnswerModel");
+const CommentModel=require("../models/CommentModel");
 const moment = require("moment");
 
 const user_register = async (req, res) => {
@@ -79,6 +81,14 @@ const update_user = async (req, res) => {
     { username: req.body.username },
     req.body.newdata
   );
+  
+  if(req.body.newdata.userimage===undefined){
+    console.log("NO Image")
+  }else{
+    const updatequeryimagedata=await QueryModel.updateMany({username:req.body.username},{userimage:req.body.newdata.userimage});
+    const updatecommentimagedata=await CommentModel.updateMany({username:req.body.username},{userimage:req.body.newdata.userimage});
+    const updateanswerimagedata=await AnswerModel.updateMany({username:req.body.username},{userimage:req.body.newdata.userimage});
+  }
 
   res.send({ message: "OK" });
 };
@@ -191,12 +201,82 @@ const user_activity = async (req, res) => {
     const findQuestionbyId=await QueryModel.findById(req.body.questionid);
     if(findQuestionbyId.views.includes(req.body.userid)===false){
       findQuestionbyId.views.push(req.body.userid);
-      findQuestionbyId.save().then(response=>{
-        res.send({message:"OK"})
-      }).catch(err=>{
-        console.log(err.message)
-      })
     }
+    findQuestionbyId.views=[...new Set(findQuestionbyId.views)]
+    findQuestionbyId.save().then(rs=>{
+      res.send({message:"OK"})
+    })
+  }else if(task==="SET_UP_VOTE_ANS_COMM"){
+    if(req.body.tag==="answer"){
+      //case1
+      const set_up_vote_done=await AnswerModel.updateOne({_id:req.body.answerID},{vote:Number(req.body.votes)+1});
+      if(set_up_vote_done.modifiedCount===1){
+        res.send({ message: "OK" });
+      }
+      
+    }else if(req.body.tag==="comment"){
+      const set_up_vote_done=await CommentModel.updateOne({_id:req.body.answerID},{vote:Number(req.body.votes)+1})
+      if(set_up_vote_done.modifiedCount===1){
+        res.send({ message: "OK" });
+      }
+    }
+      //case2
+      const set_questionID_user=await RegisterUserModel.findById(req.body.userid);
+      if(set_questionID_user.arrayofdownvote.includes(req.body.answerID)===true){
+        set_questionID_user.arrayofdownvote=set_questionID_user.arrayofdownvote.filter(val=> val!==req.body.answerID);
+
+        set_questionID_user.gavedownvote=set_questionID_user.gavedownvote-1;
+        set_questionID_user.save();
+
+        const set_ask_user_receive_vote=await RegisterUserModel.findOne({username:req.body.postusername});
+        set_ask_user_receive_vote.receivedownvote=set_ask_user_receive_vote.receivedownvote-1;
+        set_ask_user_receive_vote.save()
+      }else{
+        set_questionID_user.arrayofupvote.push(req.body.answerID);
+        set_questionID_user.gaveupvote=set_questionID_user.gaveupvote+1; //case 3
+        set_questionID_user.save();
+
+        //case4
+        const set_ask_user_receive_vote=await RegisterUserModel.findOne({username:req.body.postusername});
+        set_ask_user_receive_vote.receiveupvote=set_ask_user_receive_vote.receiveupvote+1;
+        set_ask_user_receive_vote.save()
+      }
+  }else if(task==="SET_DOWN_VOTE_ANS_COMM"){
+    if(req.body.tag==="answer"){
+      //case1
+      const set_up_vote_done=await AnswerModel.updateOne({_id:req.body.answerID},{vote:Number(req.body.votes)-1});
+      if(set_up_vote_done.modifiedCount===1){
+        res.send({ message: "OK" });
+      }
+      
+    }else if(req.body.tag==="comment"){
+      const set_up_vote_done=await CommentModel.updateOne({_id:req.body.answerID},{vote:Number(req.body.votes)-1})
+      if(set_up_vote_done.modifiedCount===1){
+        res.send({ message: "OK" });
+      }
+    }
+    //case2
+    const set_questionID_user=await RegisterUserModel.findById(req.body.userid);
+    if(set_questionID_user.arrayofupvote.includes(req.body.answerID)===true){
+      set_questionID_user.arrayofupvote=set_questionID_user.arrayofupvote.filter(val=> val!==req.body.answerID);
+
+      set_questionID_user.gaveupvote=set_questionID_user.gaveupvote-1;
+      set_questionID_user.save();
+
+      const set_ask_user_receive_vote=await RegisterUserModel.findOne({username:req.body.postusername});
+     set_ask_user_receive_vote.receiveupvote=set_ask_user_receive_vote.receiveupvote-1;
+     set_ask_user_receive_vote.save()
+    }else{
+      set_questionID_user.arrayofdownvote.push(req.body.answerID);
+      set_questionID_user.gavedownvote=set_questionID_user.gavedownvote+1; //case 3
+      set_questionID_user.save();
+
+      //case4
+      const set_ask_user_receive_vote=await RegisterUserModel.findOne({username:req.body.postusername});
+      set_ask_user_receive_vote.receivedownvote=set_ask_user_receive_vote.receivedownvote+1;
+      set_ask_user_receive_vote.save()
+    }
+
     
   }
 };
@@ -212,6 +292,46 @@ const get_single_question=async (req,res)=>{
     res.send(singlequery)
   }
 }
+const upload_answer=async (req,res)=>{
+  const {query,userimage,username,questionid,noofcomment,noofanswer} =req.body.question;
+  if(req.body.tag==="answer"){
+    const answer_data=await AnswerModel({
+      questionid,
+      username,
+      userimage,
+      answer:query,
+      date:moment().toDate()
+    })
+    await answer_data.save().then(async (rs)=>{
+      const noofanswerupdated=await RegisterUserModel.updateOne({username},{noofanswer:noofanswer+1});
+      res.send({message:"OK"});
+    }).catch(er=>{
+      console.log(er.message);
+    })
+  }else{
+    const comment_data=await CommentModel({
+      questionid,
+      username,
+      userimage,
+      comment:query,
+      date:moment().toDate()
+    })
+    await comment_data.save().then(async(rs)=>{
+      const noofcommentupdated=await RegisterUserModel.updateOne({username},{noofcomment:noofcomment+1});
+      res.send({message:"OK"});
+    }).catch(er=>{
+      console.log(er.message);
+    })
+  }
+}
+const get_all_answer=async (req,res)=>{
+  const allanswers=await AnswerModel.find({});
+    res.send(allanswers)
+}
+const get_all_comment=async (req,res)=>{
+  const allcomments=await CommentModel.find({});
+    res.send(allcomments)
+}
 
 module.exports = {
   user_register,
@@ -224,5 +344,8 @@ module.exports = {
   user_activity,
   update_password,
   get_all_question,
-  get_single_question
+  get_single_question,
+  upload_answer,
+  get_all_answer,
+  get_all_comment
 };

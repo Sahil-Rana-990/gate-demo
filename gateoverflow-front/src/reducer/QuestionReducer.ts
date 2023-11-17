@@ -6,6 +6,16 @@ const QuestionReducer = (state: any, action: any) => {
         ...state,
         allquestions: [...action.payload],
       };
+    case "GET_ALL_ANSWERS":
+      return{
+        ...state,
+        allanswers:[...action.payload]
+      }
+    case "GET_ALL_COMMENTS":
+      return{
+        ...state,
+        allcomments:[...action.payload]
+      }
     case "GET_SINGLE_QUERY":
       
       return {
@@ -13,7 +23,7 @@ const QuestionReducer = (state: any, action: any) => {
         singlequery:action.payload
       };
     case "UPLOAD_USER_QUERY":
-      fetch("https://gate-demo-api.vercel.app/query/uploadquery", {
+      fetch("http://localhost:5000/query/uploadquery", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

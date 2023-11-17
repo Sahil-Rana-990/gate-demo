@@ -14,7 +14,10 @@ const {
   user_activity,
   update_password,
   get_all_question,
-  get_single_question
+  get_single_question,
+  upload_answer,
+  get_all_answer,
+  get_all_comment
 } = require("./functions/controller");
 const cors = require("cors");
 
@@ -24,7 +27,7 @@ app.use(
   express.urlencoded({ limit: "20mb", extended: true, parameterLimit: 50000 })
 );
 app.use(cors({
-    origin:"https://gate-demo-front.vercel.app",
+    origin:"http://localhost:3000",
     methods:["POST","GET"]
 }));
 
@@ -38,9 +41,12 @@ app.post("/registeruser", user_register); //registeruser
 app.post("/loginuser", user_login);
 app.post("/updateuser", update_user);
 app.post("/query/uploadquery",upload_query);
+app.post("/query/uploadanswer",upload_answer)
 app.post("/useractivity",user_activity);
 app.post("/updatepassword",update_password);
 app.get("/allquestions",get_all_question);
+app.get("/allanswers",get_all_answer);
+app.get("/allcomments",get_all_comment);
 app.get("/query/singlequery/:queryid",get_single_question)
 
 
