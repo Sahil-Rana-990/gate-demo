@@ -45,7 +45,7 @@ const UserProvider = ({ children }: any) => {
     dispatch({type:"HANDLE_USER_PASSWORD_UPDATE",payload:{password,newpassword}})
   }
   const handleUserViewOperation=async (profileID:String,username:String)=>{
-    const Response = await fetch(`http://localhost:5000/useractivity`, {
+    const Response = await fetch(`https://gate-demo-api.vercel.app/useractivity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
