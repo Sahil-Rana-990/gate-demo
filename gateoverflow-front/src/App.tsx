@@ -8,6 +8,9 @@ import Profile from './Profile';
 import Account from './Account';
 import Questions from './Questions';
 import SingleQue from './SingleQue';
+import Users from './Users';
+import Unanswered from './Unanswered';
+import Tags from './Tags';
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
           <Route path='/ask-query' element={<AskQuery />} />
           <Route path='/user/:username' element={<Profile />} />
           <Route path='/account' element={<Account />} />
+          <Route path='/users' element={<Users/>}/>
+          <Route path='/unanswered' element={<Unanswered/>}/>
+          <Route path='/tags' element={<Tags/>}/>
         </Routes>
       </BrowserRouter>
     </>

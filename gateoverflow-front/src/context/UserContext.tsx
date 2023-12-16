@@ -44,8 +44,25 @@ const UserProvider = ({ children }: any) => {
   const handleUpdatePassword=(password:String,newpassword:String)=>{
     dispatch({type:"HANDLE_USER_PASSWORD_UPDATE",payload:{password,newpassword}})
   }
+  const handleUserViewOperation=async (profileID:String,username:String)=>{
+    const Response = await fetch(`http://localhost:5000/useractivity`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        task: "SET_USER_VIEW_TASK",
+        username,
+        profileID
+      }),
+    });
+    const res = await Response.json();
+    if(res.message==="OK"){
+      return "OK"
+    }else return "FAILED";
+  }
   return (
-    <UserContext.Provider value={{ ...state, handleLogin,handleUpdateUserData,handleUpdatePassword,getUser }}>
+    <UserContext.Provider value={{ ...state, handleLogin,handleUpdateUserData,handleUpdatePassword,getUser,handleUserViewOperation }}>
       {children}
     </UserContext.Provider>
   );

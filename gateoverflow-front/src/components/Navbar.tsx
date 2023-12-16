@@ -16,13 +16,26 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineCloseCircle, AiOutlineQuestionCircle } from "react-icons/ai";
 import { VscServerProcess } from "react-icons/vsc";
 import { BsFolder2, BsTag } from "react-icons/bs";
+import { useRef } from 'react';
 
-const Navbar = () => {
+
+const Navbar = ({ref}:any) => {
   const navigate = useNavigate();
   let [userImage, setuserImage] = useState("profile.png");
   const { isLoggedIn, userDetailInfo } = useUserContext();
   const [openMenu, setOpenMenu] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
+
+  const intervalRef:any = useRef(null);
+  
+  const windowClick=(e:any)=>{
+
+      if(e.target !== intervalRef.current && e.target.id!=="openmenuicon"){
+        setOpenMenu(false)
+      }
+      
+  }
+  window.addEventListener("click", windowClick);
 
 
   useEffect(() => {
@@ -127,6 +140,7 @@ const Navbar = () => {
           <div
             className="fixed p-5 top-0 right-0 w-[280px] bg-[#2f3136] duration-1000 shadow-2xl text-left rounded-md"
             style={{ display: openProfile ? "block" : "none" }}
+         
           >
             <div className="">
               <div className="flex items-center justify-between">
@@ -205,6 +219,7 @@ const Navbar = () => {
             <FiMenu
               className="mr-2 block inline sm:mx-4 text-white cursor-pointer"
               size={30}
+              id="openmenuicon"
               onClick={() => setOpenMenu(true)}
             ></FiMenu>
           </div>
@@ -216,6 +231,7 @@ const Navbar = () => {
                   ? `translate(0px, 0px)`
                   : `translate(280px, 0px)`,
             }}
+            ref={intervalRef}
           >
             <ul>
               <div>
@@ -259,7 +275,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="my-3 py-2 px-2 text-white hover:bg-[#7C39FF] rounded-md bg-[#3F4146]">
-                <Link to="" className="flex items-center">
+                <Link to="/unanswered" className="flex items-center">
                   <p className="text-[20px] ml-2">
                     <MdOutlineTimelapse />
                   </p>
@@ -267,7 +283,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="my-3 py-2 px-2 text-white hover:bg-[#7C39FF] rounded-md bg-[#3F4146]">
-                <Link to="" className="flex items-center">
+                <Link to="/tags" className="flex items-center">
                   <p className="text-[20px] ml-2">
                     <BsTag />
                   </p>
@@ -283,7 +299,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="my-3 py-2 px-2 text-white hover:bg-[#7C39FF] rounded-md bg-[#3F4146]">
-                <Link to="" className="flex items-center">
+                <Link to="/users" className="flex items-center">
                   <p className="text-[20px] ml-2">
                     <FiUsers />
                   </p>

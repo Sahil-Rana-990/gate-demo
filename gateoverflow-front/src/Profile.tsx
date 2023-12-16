@@ -5,10 +5,13 @@ import { AiOutlineTrophy } from "react-icons/ai";
 import { CgTag } from "react-icons/cg";
 import Moment from "moment";
 import "./animation.css";
+import { useUserContext } from "./context/UserContext";
 
 const Profile = () => {
   const { username } = useParams();
   let [userdata, setuserdata]: any = useState("");
+  let [userviews,setuserviews]=useState("");
+  const {userDetailInfo,handleUserViewOperation}=useUserContext()
 
   async function getAllUserData() {
     let getAllData: any = await fetch(
@@ -16,12 +19,27 @@ const Profile = () => {
     );
     let { singleUser } = await getAllData.json();
     setuserdata(singleUser);
+    setuserviews(singleUser.profileviews.length)
+    
   }
 
   useEffect(() => {
     getAllUserData();
-    console.log(userdata)
   }, []);
+
+  // handle user views
+  async function handleuserviews(){
+    if(userDetailInfo.username!==undefined && userdata.username!==undefined){
+      if(userdata.username!==userDetailInfo.username){
+        console.log(userdata.username,userDetailInfo.username)
+        let flag=await handleUserViewOperation(userdata._id,userDetailInfo.username)
+        getAllUserData()
+      }else console.log("object")
+    }
+  }
+  useEffect(()=>{
+    handleuserviews()
+  },[userDetailInfo])
 
   function openCity(evt: any, cityName: any) {
     var i, tabcontent: any, tablinks;
@@ -146,7 +164,7 @@ const Profile = () => {
                 </tr>
                 <tr>
                   <td>Profile Viwes</td>
-                  <td>{userdata.profileviews}</td>
+                  <td>{userviews}</td>
                 </tr>
                 <tr>
                   <td>Last Seen</td>

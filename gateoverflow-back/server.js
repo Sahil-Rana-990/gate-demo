@@ -17,7 +17,8 @@ const {
   get_single_question,
   upload_answer,
   get_all_answer,
-  get_all_comment
+  get_all_comment,
+  get_all_users
 } = require("./functions/controller");
 const cors = require("cors");
 
@@ -47,6 +48,7 @@ app.post("/updatepassword",update_password);
 app.get("/allquestions",get_all_question);
 app.get("/allanswers",get_all_answer);
 app.get("/allcomments",get_all_comment);
+app.get("/allusers",get_all_users)
 app.get("/query/singlequery/:queryid",get_single_question)
 
 

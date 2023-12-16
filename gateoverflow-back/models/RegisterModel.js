@@ -59,9 +59,9 @@ const RegisterUserSchema=new mongoose.Schema({
         required:true
     },
     profileviews:{
-        type:Number,
+        type:Array,
         required:true,
-        default:0
+        default:[]
     },
     lastseen:{
         type:Date,

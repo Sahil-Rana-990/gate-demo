@@ -394,13 +394,25 @@ export default function SingleQue() {
                         >
                           <div className="w-[50px] xs:w-[50px] flex justify-center">
                             <div>
-                              <button onClick={()=>UP_A_OR_C("answer",data._id,data.vote,data.username)}>
+                              <button onClick={()=>UP_A_OR_C("answer",data._id,data.vote,data.username)}
+                                      disabled={userDetailInfo.username === data.username
+                                        ? true
+                                        : userDetailInfo?.arrayofupvote.includes(data._id)
+                                        ? true
+                                        : false}>
                                 <BiUpArrow className="text-green-500 text-[20px] cursor-pointer xs:text-[15px]" />
                               </button>
                               <div className="text-[20px] ml-1 mt-[-7px] text-gray-400 leading-8 xs:text-[15px] xs:ml-1">
                                 {data.vote}
                               </div>
-                              <button className="hover:bg-[#472D31] duration-200" onClick={()=>DOWN_A_OR_C("answer",data._id,data.vote,data.username)}>
+                              <button onClick={()=>DOWN_A_OR_C("answer",data._id,data.vote,data.username)}
+                                     disabled={
+                                      data.vote === 0
+                                        ? true
+                                        : userDetailInfo.username === data.username
+                                        ? true
+                                        : false
+                                    }>
                                 <BiDownArrow className="text-red-500 text-[20px] xs:text-[15px]" />
                               </button>
                             </div>

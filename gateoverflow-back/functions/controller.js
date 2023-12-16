@@ -278,6 +278,15 @@ const user_activity = async (req, res) => {
     }
 
     
+  }else if(task==="SET_USER_VIEW_TASK"){
+    const findUserbyId=await RegisterUserModel.findById(req.body.profileID);
+    if(findUserbyId.profileviews.includes(req.body.username)===false){
+      findUserbyId.profileviews.push(req.body.username);
+    }
+    findUserbyId.profileviews=[...new Set(findUserbyId.profileviews)]
+    findUserbyId.save().then(rs=>{
+      res.send({message:"OK"})
+    })
   }
 };
 
@@ -332,6 +341,10 @@ const get_all_comment=async (req,res)=>{
   const allcomments=await CommentModel.find({});
     res.send(allcomments)
 }
+const get_all_users=async(req,res)=>{
+    const allusers=await RegisterUserModel.find({});
+    res.send(allusers)
+}
 
 module.exports = {
   user_register,
@@ -347,5 +360,6 @@ module.exports = {
   get_single_question,
   upload_answer,
   get_all_answer,
-  get_all_comment
+  get_all_comment,
+  get_all_users
 };
