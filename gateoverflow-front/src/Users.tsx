@@ -13,7 +13,7 @@ const Users = () => {
 
   const fetchUsers = async () => {
     try {
-      const res: any = await axios.get("http://localhost:5000/allusers");
+      const res: any = await axios.get("https://gate-demo-api.vercel.app/allusers");
       const data: any = await res.data;
       setallUsers(res.data);
       setTempUsers(res.data);
