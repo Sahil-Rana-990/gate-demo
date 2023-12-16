@@ -28,7 +28,7 @@ app.use(
   express.urlencoded({ limit: "20mb", extended: true, parameterLimit: 50000 })
 );
 app.use(cors({
-    origin:"http://localhost:3000",
+    origin:"https://gate-demo-front.vercel.app",
     methods:["POST","GET"]
 }));
 

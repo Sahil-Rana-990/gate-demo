@@ -15,17 +15,17 @@ const QuestionProvider = ({ children }: any) => {
   const [state, dispatch]: any = useReducer(reducer, initialState);
 
   const getallquestion = async () => {
-    const response = await axios.get("http://localhost:5000/allquestions");
+    const response = await axios.get("https://gate-demo-api.vercel.app/allquestions");
     const data = await response.data;
     return data;
   };
   const getallanswers= async ()=>{
-    const response=await axios.get("http://localhost:5000/allanswers");
+    const response=await axios.get("https://gate-demo-api.vercel.app/allanswers");
     const data=await response.data;
     return data;
   }
   const getallcomments= async ()=>{
-    const response=await axios.get("http://localhost:5000/allcomments");
+    const response=await axios.get("https://gate-demo-api.vercel.app/allcomments");
     const data=await response.data;
     return data;
   }
@@ -46,14 +46,14 @@ const QuestionProvider = ({ children }: any) => {
   };
   const get_single_query = async (id: String) => {
     const ResponsegetSingleQueryData = await fetch(
-      `http://localhost:5000/query/singlequery/${id}`
+      `https://gate-demo-api.vercel.app/query/singlequery/${id}`
     );
     const getSingleQueryData = await ResponsegetSingleQueryData.json();
     dispatch({ type: "GET_SINGLE_QUERY", payload: getSingleQueryData });
   };
 
   const set_up_vote = async (id: String, votes: any,userid:String,askusername:String) => {
-    const Response = await fetch(`http://localhost:5000/useractivity`, {
+    const Response = await fetch(`https://gate-demo-api.vercel.app/useractivity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const QuestionProvider = ({ children }: any) => {
     return res.message;
   };
   const set_up_ANS_or_COMM=async (tag:String,id: String, votes: any,userid:String,postusername:String)=>{
-    const Response = await fetch(`http://localhost:5000/useractivity`, {
+    const Response = await fetch(`https://gate-demo-api.vercel.app/useractivity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const QuestionProvider = ({ children }: any) => {
     return res.message;
   }
   const set_down_ANS_or_COMM=async(tag:String,id: String, votes: any,userid:String,postusername:String)=>{
-    const Response = await fetch(`http://localhost:5000/useractivity`, {
+    const Response = await fetch(`https://gate-demo-api.vercel.app/useractivity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -107,7 +107,7 @@ const QuestionProvider = ({ children }: any) => {
   }
 
   const set_down_vote = async (id: String, votes: any,userid:String,askusername:String) => {
-    const Response = await fetch(`http://localhost:5000/useractivity`, {
+    const Response = await fetch(`https://gate-demo-api.vercel.app/useractivity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +124,7 @@ const QuestionProvider = ({ children }: any) => {
     return res.message;
   };
   const set_question_views = async (questionid:String,userid: String) => {
-    const response=await fetch('http://localhost:5000/useractivity',{
+    const response=await fetch('https://gate-demo-api.vercel.app/useractivity',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -140,7 +140,7 @@ const QuestionProvider = ({ children }: any) => {
   };
 
   const set_post_answer_or_comment=async(tag:String,question:any)=>{
-    const response=await fetch('http://localhost:5000/query/uploadanswer',{
+    const response=await fetch('https://gate-demo-api.vercel.app/query/uploadanswer',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
