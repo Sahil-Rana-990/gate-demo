@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div className='my-10 xs:my-5'>
       <div className='flex flex-col items-center px-6 mx-auto lg:py-0'>
-        <div className='w-[800px] xs:w-[300px]'>
+        <div className='w-[800px] sm:w-[500px] xs:w-[300px]'>
           {/* title for subject */}
           <div className='text-4xl font-medium font-sans text-gray-500 text-center xs:text-[30px]'>
             GateOverFlow Subject
